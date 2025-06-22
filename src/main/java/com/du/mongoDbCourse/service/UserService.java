@@ -40,7 +40,21 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public User fromDto(UserDto userDto) {
+    public UserDto update(UserDto userDto) {
+        User existingUser = userRepository.findById(userDto.getId())
+                                    .orElseThrow(() -> new ObjectNotFoundException(
+                                            "User not found with id: " + userDto.getId()));
+        updateData(existingUser, userDto);
+        existingUser = userRepository.save(existingUser);
+        return new UserDto(existingUser);
+    }
+
+    private void updateData(User existingUser, UserDto userDto) {
+        existingUser.setName(userDto.getName());
+        existingUser.setEmail(userDto.getEmail());
+    }
+
+    private User fromDto(UserDto userDto) {
         return new User(userDto.getId(), userDto.getName(), userDto.getEmail());
     }
 
