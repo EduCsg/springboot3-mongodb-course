@@ -34,6 +34,12 @@ public class UserService {
         return new UserDto(user);
     }
 
+    public void delete(String id) {
+        User user = userRepository.findById(id)
+                            .orElseThrow(() -> new ObjectNotFoundException("User not found with id: " + id));
+        userRepository.delete(user);
+    }
+
     public User fromDto(UserDto userDto) {
         return new User(userDto.getId(), userDto.getName(), userDto.getEmail());
     }
