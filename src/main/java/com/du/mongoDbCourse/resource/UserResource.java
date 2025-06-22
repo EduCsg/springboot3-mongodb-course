@@ -1,6 +1,7 @@
 package com.du.mongoDbCourse.resource;
 
 import com.du.mongoDbCourse.domain.User;
+import com.du.mongoDbCourse.dto.UserDto;
 import com.du.mongoDbCourse.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class UserResource {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
+    public ResponseEntity<List<UserDto>> findAll() {
         return ResponseEntity.ok(userService.findAll());
     }
 
