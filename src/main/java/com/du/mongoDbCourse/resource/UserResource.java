@@ -4,11 +4,9 @@ import com.du.mongoDbCourse.domain.User;
 import com.du.mongoDbCourse.dto.UserDto;
 import com.du.mongoDbCourse.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -29,6 +27,13 @@ public class UserResource {
     @GetMapping("{id}")
     public ResponseEntity<UserDto> findById(@PathVariable String id) {
         return ResponseEntity.ok(userService.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDto> insert(@RequestBody UserDto userDto) {
+        UserDto createdUser = userService.insert(userDto);
+        URI uri = URI.create("/users/" + createdUser.getId());
+        return ResponseEntity.created(uri).body(createdUser);
     }
 
 }

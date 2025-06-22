@@ -28,4 +28,14 @@ public class UserService {
         return new UserDto(user);
     }
 
+    public UserDto insert(UserDto userDto) {
+        User user = fromDto(userDto);
+        user = userRepository.insert(user);
+        return new UserDto(user);
+    }
+
+    public User fromDto(UserDto userDto) {
+        return new User(userDto.getId(), userDto.getName(), userDto.getEmail());
+    }
+
 }
