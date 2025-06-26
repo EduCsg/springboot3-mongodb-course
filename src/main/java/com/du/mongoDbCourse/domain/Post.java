@@ -1,5 +1,6 @@
 package com.du.mongoDbCourse.domain;
 
+import com.du.mongoDbCourse.dto.AuthorDto;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,11 +18,11 @@ public class Post implements Serializable {
     private String title;
     private String body;
     private Date date;
-    private User author;
+    private AuthorDto author;
 
     public Post() {}
 
-    public Post(String id, String title, String body, Date date, User author) {
+    public Post(String id, String title, String body, Date date, AuthorDto author) {
         this.id = id;
         this.title = title;
         this.body = body;
@@ -61,11 +62,11 @@ public class Post implements Serializable {
         this.date = date;
     }
 
-    public User getAuthor() {
+    public AuthorDto getAuthor() {
         return author;
     }
 
-    public void setAuthor(User author) {
+    public void setAuthor(AuthorDto author) {
         this.author = author;
     }
 

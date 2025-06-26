@@ -2,6 +2,7 @@ package com.du.mongoDbCourse.config;
 
 import com.du.mongoDbCourse.domain.Post;
 import com.du.mongoDbCourse.domain.User;
+import com.du.mongoDbCourse.dto.AuthorDto;
 import com.du.mongoDbCourse.repository.PostRepository;
 import com.du.mongoDbCourse.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -29,6 +30,7 @@ public class DatabaseSetup implements CommandLineRunner {
         dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
 
         userRepository.deleteAll();
+        postRepository.deleteAll();
 
         User u1 = new User(null, "User1", "User1@test.com");
         User u2 = new User(null, "User2", "User2@test.com");
@@ -36,8 +38,8 @@ public class DatabaseSetup implements CommandLineRunner {
 
         userRepository.saveAll(Arrays.asList(u1, u2, u3));
 
-        Post p1 = new Post(null, "Post1", "Content of Post1", dateFormat.parse("01/01/2025"), u1);
-        Post p2 = new Post(null, "Post2", "Content of Post2", dateFormat.parse("15/01/2025"), u1);
+        Post p1 = new Post(null, "Post1", "Content of Post1", dateFormat.parse("01/01/2025"), new AuthorDto(u1));
+        Post p2 = new Post(null, "Post2", "Content of Post2", dateFormat.parse("15/01/2025"), new AuthorDto(u1));
 
         postRepository.saveAll(Arrays.asList(p1, p2));
 
