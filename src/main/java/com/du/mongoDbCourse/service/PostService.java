@@ -25,7 +25,7 @@ public class PostService {
     public List<Post> findByTitle(String title) {
         String decodedTitle = URL.decodeParam(title);
 
-        List<Post> posts = postRepository.findByTitleContainingIgnoreCase(decodedTitle);
+        List<Post> posts = postRepository.searchByTitle(decodedTitle);
 
         if (posts.isEmpty())
             throw new ObjectNotFoundException("No posts found with title containing: " + title);
