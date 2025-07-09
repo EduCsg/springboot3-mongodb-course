@@ -43,6 +43,18 @@ public class DatabaseSetup implements CommandLineRunner {
 
         postRepository.saveAll(Arrays.asList(p1, p2));
 
+        u1.getPosts().addAll(Arrays.asList(p1, p2));
+        userRepository.save(u1);
+
+        //        Post p3 = new Post(null, "Post3", "Content of Post3", dateFormat.parse("20/01/2025"), new AuthorDto(u2));
+        //        Post p4 = new Post(null, "Post4", "Content of Post4", dateFormat.parse("25/01/2025"), new AuthorDto(u3));
+        //
+        //        postRepository.saveAll(Arrays.asList(p3, p4));
+        //
+        //        u2.getPosts().add(p3);
+        //        u3.getPosts().add(p4);
+        //        userRepository.saveAll(Arrays.asList(u2, u3));
+
     }
 
 }
