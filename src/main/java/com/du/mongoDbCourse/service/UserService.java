@@ -1,5 +1,6 @@
 package com.du.mongoDbCourse.service;
 
+import com.du.mongoDbCourse.domain.Post;
 import com.du.mongoDbCourse.domain.User;
 import com.du.mongoDbCourse.dto.UserDto;
 import com.du.mongoDbCourse.repository.UserRepository;
@@ -47,6 +48,13 @@ public class UserService {
         updateData(existingUser, userDto);
         existingUser = userRepository.save(existingUser);
         return new UserDto(existingUser);
+    }
+
+    public List<Post> findPostsByUser(String id) {
+        User user = userRepository.findById(id)
+                            .orElseThrow(() -> new ObjectNotFoundException("User not found with id: " + id));
+
+        return user.getPosts();
     }
 
     private void updateData(User existingUser, UserDto userDto) {

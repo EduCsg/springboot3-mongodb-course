@@ -1,5 +1,6 @@
 package com.du.mongoDbCourse.resource;
 
+import com.du.mongoDbCourse.domain.Post;
 import com.du.mongoDbCourse.domain.User;
 import com.du.mongoDbCourse.dto.UserDto;
 import com.du.mongoDbCourse.service.UserService;
@@ -46,6 +47,11 @@ public class UserResource {
     public ResponseEntity<UserDto> update(@PathVariable String id, @RequestBody UserDto userDto) {
         userDto.setId(id);
         return ResponseEntity.ok(userService.update(userDto));
+    }
+
+    @GetMapping("{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        return ResponseEntity.ok(userService.findPostsByUser(id));
     }
 
 }
