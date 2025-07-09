@@ -3,10 +3,9 @@ package com.du.mongoDbCourse.resource;
 import com.du.mongoDbCourse.domain.Post;
 import com.du.mongoDbCourse.service.PostService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/posts")
@@ -21,6 +20,11 @@ public class PostResource {
     @GetMapping("{id}")
     public ResponseEntity<Post> findById(@PathVariable String id) {
         return ResponseEntity.ok(postService.findById(id));
+    }
+
+    @GetMapping("title")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(defaultValue = "") String title) {
+        return ResponseEntity.ok(postService.findByTitle(title));
     }
 
 }
